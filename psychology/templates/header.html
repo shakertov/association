@@ -1,0 +1,26 @@
+{% load static %}
+<div class="container py-2">
+    <div class="row row-cols-4 align-items-center">
+      <div class="col">
+        <img src="{% static 'logo.jpg' %}" class="logo" />
+      </div>
+      <div class="col justify-content-center">
+        <div class="s-icon">
+          <a href="https://vk.com/asexpertov" target="_blank"><img src="{% static 'img/vk.png' %}"></a>
+          <a href="https://t.me/+4WuXzdw-s7pmN2Ey" target="_blank"><img src="{% static 'img/tg.png' %}"></a>
+          <a href="mailto:a.expertov@yandex.ru" target="_blank"><img src="{% static 'img/mail.png' %}"></a>
+        </div>
+      </div>
+      <div class="col justify-content-center">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Выберите ваш город</option>
+          <option value="1">Екатеринбург</option>
+          <option value="2">Москва</option>
+          <option value="3">Санкт-Петербург</option>
+        </select>
+      </div>
+      <div class="col justify-content-center">
+        <button class="btn btn-primary">Вступить в ассоциацию</button>
+      </div>
+    </div>
+  </div>
