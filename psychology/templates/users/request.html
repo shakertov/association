@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container my-5">
+
+	<div class="card">
+		<div class="card-header">
+			Отправить заявку на вступление в Ассоциацию
+		</div>
+		<div class="card-body">
+			{% if form.errors %}
+			{% for error in form.non_field_errors %}
+			<div class="alert alert-danger" role="alert">
+				{{ error|escape }}
+			</div>
+			{% endfor %}
+
+			{% endif %}
+			<form novalidate action="{% url 'users:get_representative' %}" method="post">
+				{% csrf_token %}
+				{% for field in form %}
+				<div class="row my-2 py-2 align-items-center border-bottom">
+					<div class="col-4 text-center">
+						<label class="form-label" id="{{ field.id_for_label }}">{{ field.label }}</label>
+					</div>
+					<div class="col-8">
+						{{ field }}
+						{% if field.errors %}
+							{% for error in field.errors %}
+							<div class="form-text text-danger">{{ error|escape }}</div>
+							{% endfor %}
+						{% endif %}
+						{% if field.help_text %}
+						<div class="form-text">{{ field.help_text }}</div>
+						{% endif %}
+					</div>
+				</div>
+				{% endfor %}
+				<div class="row my-2 py-2">
+					<div class="col text-center">
+						<button type="submit" class="btn btn-primary">Отправить</button>
+					</div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

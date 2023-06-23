@@ -19,3 +19,4 @@ def copyright(request):
 
 def representative(request):
 	"""Представительства"""
+	return render(request, 'users/request.html')
