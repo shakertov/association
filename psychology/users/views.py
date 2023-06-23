@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 # Загрузка моделей
 from .models import RequestUser
@@ -9,21 +9,15 @@ from .forms import RequestUserForm
 
 
 def get_representative(request):
+	"""Форма для отправки запроса на вступление в ассоциацию"""
 	form = RequestUserForm()
 
 	if request.method == 'POST':
 		form = RequestUserForm(request.POST)
 		if form.is_valid():
-			obj = {
-				'first_name':form.cleaned_data['first_name'],
-				'last_name':form.cleaned_data['last_name'],
-				'middle_name':form.cleaned_data['middle_name'],
-				'email':form.cleaned_data['email'],
-				'city':form.cleaned_data['city'],
-				'phone':form.cleaned_data['phone'],
-				'skill':form.cleaned_data['skill']
-			}
-			return HttpResponse(str(obj))
+			obj = RequestUser(**form.cleaned_data)
+			obj.save()
+			return HttpResponseRedirect('/users/list_representative')
 
 	data = {
 		'form': form,
@@ -31,3 +25,15 @@ def get_representative(request):
 	}
 
 	return render(request, 'users/request.html', data)
+
+
+def list_representative(request):
+	"""Список всех заявок на вступление"""
+	requests = RequestUser.objects.all()
+	data = {
+		'requests': requests,
+		'title': 'Список заявок'
+	}
+	return render(request, 'users/list_requests.html', data)
+
+

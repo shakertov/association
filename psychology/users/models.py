@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import validate_email
 
 
 class RequestUser(models.Model):
@@ -20,7 +21,7 @@ class RequestUser(models.Model):
 		max_length=20)
 	email = models.EmailField(
 		verbose_name='Email',
-		help_text='Введите ваш Email',
+		help_text='Введите ваш Email. Необходимо указывать тот, который будет использован при регистрации.',
 		max_length=100)
 	city = models.CharField(
 		verbose_name='Город',
@@ -30,3 +31,6 @@ class RequestUser(models.Model):
 		verbose_name='Область специализации',
 		help_text='Введите через знак - ; - ваши навыки. Например - психология; эзотерика; и т.д.',
 		max_length=255)
+
+	class Meta:
+		ordering = ['-id']

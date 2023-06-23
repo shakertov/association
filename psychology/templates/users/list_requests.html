@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+	<div class="card">
+		<div class="card-header">
+			Список заявок на вступление в Ассоциацию
+		</div>
+		<div class="card-body">
+			<p>Зелёным цветом подсвечиваются заявки, по которым прошла регистрация на портале. Голубым цветом подсвечиваются заявки, по которым было выслано приглашение на почту. Не подсвечиваются остальные заявки.</p>
+			<table class="table table-bordered table-hover table-stripped">
+				<thead>
+					<tr class="table-dark">
+						<td>ID</td>
+						<td>Фамилия</td>
+						<td>Имя</td>
+						<td>Телефон</td>
+						<td>Город</td>
+						<td>Специализация</td>
+						<td>Отправить приглашение?</td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for r in requests %}
+					<tr class="table-success">
+						<td>{{ r.id }}</td>
+						<td>{{ r.last_name }}</td>
+						<td>{{ r.first_name }}</td>
+						<td>{{ r.phone }}</td>
+						<td>{{ r.city }}</td>
+						<td>{{ r.skill }}</td>
+						<td><a href="#">Пригласить</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}
