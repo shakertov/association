@@ -10,5 +10,8 @@ urlpatterns = [
 		name='get_representative'),
 	path('list_representative/',
 		views.list_representative,
-		name='list_representative')
+		name='list_representative'),
+	path('invite/<int:id>/',
+		views.invite,
+		name='invite')
 ]

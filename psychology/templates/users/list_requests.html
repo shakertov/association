@@ -22,14 +22,14 @@
 				</thead>
 				<tbody>
 					{% for r in requests %}
-					<tr class="table-success">
+					<tr {% if r.invite %}class="table-info"{% endif %}>
 						<td>{{ r.id }}</td>
 						<td>{{ r.last_name }}</td>
 						<td>{{ r.first_name }}</td>
 						<td>{{ r.phone }}</td>
 						<td>{{ r.city }}</td>
 						<td>{{ r.skill }}</td>
-						<td><a href="#">Пригласить</a></td>
+						<td><a href="{% url 'users:invite' r.id %}">Пригласить</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>

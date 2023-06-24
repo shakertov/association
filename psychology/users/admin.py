@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RequestUser
+from .models import RequestUser, Invite
 
 
 class RequestUserAdmin(admin.ModelAdmin):
@@ -17,3 +17,4 @@ class RequestUserAdmin(admin.ModelAdmin):
 	)
 
 admin.site.register(RequestUser, RequestUserAdmin)
+admin.site.register(Invite)

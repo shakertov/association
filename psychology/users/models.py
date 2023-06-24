@@ -34,3 +34,17 @@ class RequestUser(models.Model):
 
 	class Meta:
 		ordering = ['-id']
+
+
+class Invite(models.Model):
+	request = models.OneToOneField(
+		'RequestUser',
+		on_delete=models.CASCADE,
+		related_name='invite'
+	)
+	link = models.CharField(
+		max_length=32
+	)
+
+	class Meta:
+		unique_together = ('request', 'link', )
