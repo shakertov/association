@@ -21,6 +21,7 @@ urlpatterns = [
 	path('list_representative/',
 		lk_admin.list_representative,
 		name='list_representative'),
+
 	path('department/add/',
 		lk_admin.department_add,
 		name='department_add'),
@@ -33,6 +34,16 @@ urlpatterns = [
 	path('departments/',
 		lk_admin.departments,
 		name='departments'),
+
+	path('skill/add/',
+		lk_admin.skill_add,
+		name='skill_add'),
+	path('skill/edit/<int:id>/',
+		lk_admin.skill_edit,
+		name='skill_edit'),
+	path('skill/delete/<int:id>/',
+		lk_admin.skill_delete,
+		name='skill_delete'),
 	path('skills/',
 		lk_admin.skills,
 		name='skills')

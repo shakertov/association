@@ -7,21 +7,21 @@
 			{{ title }}
 		</div>
 		<div class="card-body">
-			<p>Чтобы добавить город, перейдите по ссылке: <a href="{% url 'users:department_add' %}">Добавить город</a></p>
+			<p>Чтобы добавить навык, перейдите по ссылке: <a href="{% url 'users:skill_add' %}">Добавить навык</a></p>
 			<table class="table table-bordered table-hover table-stripped">
 				<thead>
 					<tr class="table-dark">
 						<td class="col-1">ID</td>
-						<td class="col-7">Город</td>
+						<td class="col-7">Навык</td>
 						<td class="col-4"></td>
 					</tr>
 				</thead>
 				<tbody>
-					{% for d in departments %}
+					{% for s in skills %}
 					<tr>
-						<td>{{ d.id }}</td>
-						<td>{{ d.city }}</td>
-						<td><a href="">Редактировать</a> | <a href="{% url 'users:department_delete' d.id %}">Удалить</a></td>
+						<td>{{ s.id }}</td>
+						<td>{{ s.skill }}</td>
+						<td><a href="{% url 'users:skill_edit' s.id %}">Редактировать</a> | <a href="{% url 'users:skill_delete' s.id %}">Удалить</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>

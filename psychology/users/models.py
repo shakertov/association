@@ -54,9 +54,15 @@ class Department(models.Model):
 		help_text='Введите название города, в котором имеются Ваши представители',
 		max_length=100)
 
+	class Meta:
+		ordering = ['city']
+
 
 class Skill(models.Model):
 	skill = models.CharField(
 		verbose_name='Область специализации',
 		help_text='Введите название специализации',
 		max_length=100)
+
+	class Meta:
+		ordering = ['skill']

@@ -66,6 +66,7 @@ def department_edit(request, id):
 	data = {
 		'form': form,
 		'title': 'Редактирование города',
+		'action': reverse('users:department_edit'),
 		'button': 'Изменить название города'
 	}
 	return render(request, 'users/request.html', data)
@@ -94,5 +95,69 @@ def departments(request):
 	return render(request, 'users/departments.html', data)
 
 
+def skill_add(request):
+	form = SkillForm()
+	if request.method == 'POST':
+		form = SkillForm(request.POST)
+		if form.is_valid():
+			skill = form.cleaned_data.get('skill')
+			form.save()
+			messages.add_message(
+				request,
+				messages.INFO,
+				'Направление: ' + skill + ' - добавлено в базу данных.')
+			return HttpResponseRedirect(reverse('users:skills'))
+	data = {
+		'form': form,
+		'title': 'Добавление специализации',
+		'action': reverse('users:skill_add'),
+		'button': 'Добавить навык'
+	}
+	return render(request, 'users/request.html', data)
+
+
+def skill_edit(request, id):
+	try:
+		obj = Skill.objects.get(id=id)
+	except Skill.DoesNotExist:
+		return HttpResponseRedirect(reverse('users:skill_edit'))
+	form = SkillForm(request.POST or None, instance=obj)
+	if request.method == 'POST':
+		if form.is_valid():
+			skill = form.cleaned_data.get('skill')
+			form.save()
+			messages.add_message(
+				request,
+				messages.INFO,
+				'Навык: ' + skill + ' - отредактирован.')
+			return HttpResponseRedirect(reverse('users:skill_edit', args=[obj.id]))
+	data = {
+		'form': form,
+		'title': 'Редактирование навыка',
+		'action': reverse('users:skill_edit', args=[obj.id]),
+		'button': 'Изменить навык'
+	}
+	return render(request, 'users/request.html', data)
+
+
+def skill_delete(request, id):
+	try:
+		obj = Skill.objects.get(id=id)
+	except Skill.DoesNotExist:
+		return HttpResponseRedirect(reverse('users:skills'))
+	skill = obj.skill
+	obj.delete()
+	messages.add_message(
+				request,
+				messages.INFO,
+				'Навык: ' + skill + ' - удалён.')
+	return HttpResponseRedirect(reverse('users:skills'))
+
+
 def skills(request):
-	return
+	skills = Skill.objects.all()
+	data = {
+		'skills': skills,
+		'title': 'Список всех направлений деятельности экспертов'
+	}
+	return render(request, 'users/skills.html', data)
