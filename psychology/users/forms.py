@@ -1,5 +1,9 @@
 from django import forms
-from .models import RequestUser
+from users.models import (
+	RequestUser,
+	Department,
+	Skill
+)
 
 
 class YourOwnModelForm(forms.ModelForm):
@@ -10,7 +14,18 @@ class YourOwnModelForm(forms.ModelForm):
 
 
 class RequestUserForm(YourOwnModelForm):
-
-	class Meta(YourOwnModelForm):
+	class Meta:
 		model = RequestUser
+		fields = '__all__'
+
+
+class DepartmentForm(YourOwnModelForm):
+	class Meta:
+		model = Department
+		fields = '__all__'
+
+
+class SkillForm(YourOwnModelForm):
+	class Meta:
+		model = Skill
 		fields = '__all__'

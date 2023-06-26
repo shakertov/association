@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'lk_admin.html' %}
 
 
 {% block content %}
@@ -6,7 +6,7 @@
 
 	<div class="card">
 		<div class="card-header">
-			Отправить заявку на вступление в Ассоциацию
+			{{ title }}
 		</div>
 		<div class="card-body">
 			{% if form.errors %}
@@ -17,7 +17,7 @@
 			{% endfor %}
 
 			{% endif %}
-			<form novalidate action="{% url 'users:get_representative' %}" method="post">
+			<form novalidate action="{{ action }}" method="post">
 				{% csrf_token %}
 				{% for field in form %}
 				<div class="row my-2 py-2 align-items-center border-bottom">
@@ -39,7 +39,7 @@
 				{% endfor %}
 				<div class="row my-2 py-2">
 					<div class="col text-center">
-						<button type="submit" class="btn btn-primary">Отправить</button>
+						<button type="submit" class="btn btn-primary">{{ button }}</button>
 					</div>
 					
 				</div>

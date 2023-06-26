@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav top-menu">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'pages:index' %}">Ассоциация</a>
+          <a class="nav-link" href="{% url 'users:list_representative' %}">Список заявок</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Сообщество экспертов</a>
+          <a class="nav-link" href="{% url 'users:departments' %}">Список городов</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Мероприятия</a>
+          <a class="nav-link" href="{% url 'users:skills' %}">Список направлений</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Авторизация</a>
+          <a class="nav-link" href="#">Выйти</a>
         </li>
       </ul>
     </div>

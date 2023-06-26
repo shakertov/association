@@ -40,11 +40,23 @@ class Invite(models.Model):
 	request = models.OneToOneField(
 		'RequestUser',
 		on_delete=models.CASCADE,
-		related_name='invite'
-	)
+		related_name='invite')
 	link = models.CharField(
-		max_length=32
-	)
+		max_length=32)
 
 	class Meta:
 		unique_together = ('request', 'link', )
+
+
+class Department(models.Model):
+	city = models.CharField(
+		verbose_name='Название города',
+		help_text='Введите название города, в котором имеются Ваши представители',
+		max_length=100)
+
+
+class Skill(models.Model):
+	skill = models.CharField(
+		verbose_name='Область специализации',
+		help_text='Введите название специализации',
+		max_length=100)
