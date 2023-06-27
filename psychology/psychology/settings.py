@@ -109,6 +109,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = 'static-django/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
@@ -123,3 +124,7 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 # Message Settings
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+# Custom User Model
+AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_URL = '/login/'

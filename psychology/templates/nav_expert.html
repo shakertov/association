@@ -1,0 +1,21 @@
+<div class="container">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav top-menu">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:list_representative' %}">Мои мероприятия</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:departments' %}">Мой профиль</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Выйти</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>

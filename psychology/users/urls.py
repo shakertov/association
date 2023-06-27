@@ -16,6 +16,15 @@ urlpatterns = [
 	path('invite/<int:id>/',
 		views.invite,
 		name='invite'),
+	path('reg/<str:link>',
+		views.registration,
+		name='registration'),
+	path('login/',
+		views.login_view,
+		name='login'),
+	path('logout/',
+		views.logout_view,
+		name='logout'),
 
 	# Личный кабинет администратора
 	path('list_representative/',

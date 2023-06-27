@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Загрузка моделей
 from users.models import (
@@ -16,9 +17,16 @@ from users.forms import (
 	SkillForm
 )
 
+# Хелпер
+from users.helpers import lk_redirect
 
+
+@login_required
 def list_representative(request):
 	"""Список всех заявок на вступление"""
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	requests = RequestUser.objects.all()
 	data = {
 		'requests': requests,
@@ -26,8 +34,11 @@ def list_representative(request):
 	}
 	return render(request, 'users/list_requests.html', data)
 
-
+@login_required
 def department_add(request):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	form = DepartmentForm()
 	if request.method == 'POST':
 		form = DepartmentForm(request.POST)
@@ -47,8 +58,11 @@ def department_add(request):
 	}
 	return render(request, 'users/request.html', data)
 
-
+@login_required
 def department_edit(request, id):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	try:
 		obj = Department.objects.get(id=id)
 	except Department.DoesNotExist:
@@ -71,8 +85,11 @@ def department_edit(request, id):
 	}
 	return render(request, 'users/request.html', data)
 
-
+@login_required
 def department_delete(request, id):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	try:
 		obj = Department.objects.get(id=id)
 	except Department.DoesNotExist:
@@ -85,8 +102,11 @@ def department_delete(request, id):
 				'Город: ' + city + ' - удалён.')
 	return HttpResponseRedirect(reverse('users:departments'))
 
-
+@login_required
 def departments(request):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	departments = Department.objects.all()
 	data = {
 		'departments': departments,
@@ -94,8 +114,11 @@ def departments(request):
 	}
 	return render(request, 'users/departments.html', data)
 
-
+@login_required
 def skill_add(request):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	form = SkillForm()
 	if request.method == 'POST':
 		form = SkillForm(request.POST)
@@ -115,8 +138,11 @@ def skill_add(request):
 	}
 	return render(request, 'users/request.html', data)
 
-
+@login_required
 def skill_edit(request, id):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	try:
 		obj = Skill.objects.get(id=id)
 	except Skill.DoesNotExist:
@@ -139,8 +165,11 @@ def skill_edit(request, id):
 	}
 	return render(request, 'users/request.html', data)
 
-
+@login_required
 def skill_delete(request, id):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	try:
 		obj = Skill.objects.get(id=id)
 	except Skill.DoesNotExist:
@@ -153,8 +182,11 @@ def skill_delete(request, id):
 				'Навык: ' + skill + ' - удалён.')
 	return HttpResponseRedirect(reverse('users:skills'))
 
-
+@login_required
 def skills(request):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
 	skills = Skill.objects.all()
 	data = {
 		'skills': skills,
