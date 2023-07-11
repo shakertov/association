@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -193,3 +193,6 @@ def skills(request):
 		'title': 'Список всех направлений деятельности экспертов'
 	}
 	return render(request, 'users/skills.html', data)
+
+def just(request):
+	return HttpResponse(resolve(request.path))

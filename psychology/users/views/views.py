@@ -138,9 +138,6 @@ def registration(request, link):
 
 
 def login_view(request):
-	response = lk_redirect(request)
-	if response is not None:
-		return response
 	form = LoginForm(request.POST or None)
 	if request.method == 'POST':
 		if form.is_valid():

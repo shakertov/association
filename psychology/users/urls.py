@@ -55,5 +55,8 @@ urlpatterns = [
 		name='skill_delete'),
 	path('skills/',
 		lk_admin.skills,
-		name='skills')
+		name='skills'),
+	path('just/',
+		lk_admin.just,
+		name='just12'),
 ]
