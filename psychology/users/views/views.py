@@ -46,7 +46,7 @@ def get_representative(request):
 		'button': 'Отправить'
 	}
 
-	return render(request, 'users/request.html', data)
+	return render(request, 'users/request_for_base.html', data)
 
 
 def invite(request, id):
@@ -122,6 +122,9 @@ def registration(request, link):
 			fields_extra['expert'] = expert
 			ExtraFieldsExpert.objects.create(**fields_extra)
 
+			link_for_reg.status = True
+			link_for_reg.save()
+
 			messages.add_message(
 				request,
 				messages.INFO,
@@ -134,23 +137,32 @@ def registration(request, link):
 		'action': reverse('users:registration', args=[link]),
 		'button': 'Зарегистрироваться'
 	}
-	return render(request, 'users/request.html', data)
+	return render(request, 'users/request_for_base.html', data)
 
 
 def login_view(request):
+	if not request.user.is_anonymous:
+		if request.user.is_admin:
+			return HttpResponseRedirect(reverse('users:list_representative'))
+		if request.user.is_expert:
+			return HttpResponseRedirect(reverse('users:list_representative'))
 	form = LoginForm(request.POST or None)
 	if request.method == 'POST':
 		if form.is_valid():
 			email = form.cleaned_data.get('email')
 			password = form.cleaned_data.get('password')
-			expert = authenticate(email=email, password=password)
-			if expert is not None:
-				login(request, expert)
+			user = authenticate(email=email, password=password)
+			if user is not None:
+				login(request, user)
 
 				messages.add_message(
 				request,
 				messages.INFO,
-				'Добро пожаловать, Уважаемый ' + expert.first_name)
+				'С возвращением!')
+				if user.is_admin:
+					return HttpResponseRedirect(reverse('users:list_representative'))
+				if user.is_expert:
+					return HttpResponseRedirect(reverse('users:list_representative'))
 				return HttpResponseRedirect(reverse('pages:index'))
 	data = {
 		'form': form,
@@ -158,7 +170,7 @@ def login_view(request):
 		'action': reverse('users:login'),
 		'button': 'Войти в ЛК'
 	}
-	return render(request, 'users/request.html', data)
+	return render(request, 'users/login.html', data)
 
 
 def logout_view(request):

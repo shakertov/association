@@ -127,4 +127,4 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.CustomUser'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/users/login/'

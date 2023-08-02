@@ -7,13 +7,16 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav top-menu">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'users:list_representative' %}">Мои мероприятия</a>
+          <a class="nav-link" href="{% url 'users:list_representative' %}">Перейти на сайт</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'users:departments' %}">Мой профиль</a>
+          <a class="nav-link" href="{% url 'users:list_representative' %}">Мероприятия</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Выйти</a>
+          <a class="nav-link" href="{% url 'users:departments' %}">Профиль</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>
         </li>
       </ul>
     </div>

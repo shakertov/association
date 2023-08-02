@@ -113,6 +113,9 @@ class Invite(models.Model):
 		related_name='invite')
 	link = models.CharField(
 		max_length=32)
+	status = models.BooleanField(
+		default=False
+		)
 
 	class Meta:
 		unique_together = ('request', 'link', )

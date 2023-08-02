@@ -7,6 +7,9 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav top-menu">
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'pages:index' %}">Перейти на сайт</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'users:list_representative' %}">Список заявок</a>
         </li>
         <li class="nav-item">
@@ -16,7 +19,7 @@
           <a class="nav-link" href="{% url 'users:skills' %}">Список направлений</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Выйти</a>
+          <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>
         </li>
       </ul>
     </div>

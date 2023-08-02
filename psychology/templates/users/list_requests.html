@@ -7,7 +7,7 @@
 			Список заявок на вступление в Ассоциацию
 		</div>
 		<div class="card-body">
-			<p>Зелёным цветом подсвечиваются заявки, по которым прошла регистрация на портале. Голубым цветом подсвечиваются заявки, по которым было выслано приглашение на почту. Не подсвечиваются остальные заявки.</p>
+			<p>Желтым цветом подсвечиваются заявки, по которым прошла регистрация на портале. Голубым цветом подсвечиваются заявки, по которым было выслано приглашение на почту. Не подсвечиваются остальные заявки.</p>
 			<table class="table table-bordered table-hover table-stripped">
 				<thead>
 					<tr class="table-dark">
@@ -22,14 +22,30 @@
 				</thead>
 				<tbody>
 					{% for r in requests %}
-					<tr {% if r.invite %}class="table-info"{% endif %}>
+					<tr {% if r.invite %}
+
+							{% if r.invite.status %}
+								class="table-warning"
+							{% else %}
+								class="table-info"
+							{% endif %}
+
+					{% endif %}>
 						<td>{{ r.id }}</td>
 						<td>{{ r.last_name }}</td>
 						<td>{{ r.first_name }}</td>
 						<td>{{ r.phone }}</td>
 						<td>{{ r.city }}</td>
 						<td>{{ r.skill }}</td>
-						<td><a href="{% url 'users:invite' r.id %}">Пригласить</a></td>
+						<td>
+							{% if r.invite %}
+								{% if r.invite.status %}
+								Зарегистрировался...
+								{% else %}
+								<a href="{% url 'users:invite' r.id %}">Пригласить повторно</a>
+								{% endif %}
+							{% endif %}
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
