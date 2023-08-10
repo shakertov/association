@@ -44,6 +44,8 @@
 								{% else %}
 								<a href="{% url 'users:invite' r.id %}">Пригласить повторно</a>
 								{% endif %}
+							{% else %}
+							<a href="{% url 'users:invite' r.id %}">Выслать приглашение</a>
 							{% endif %}
 						</td>
 					</tr>

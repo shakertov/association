@@ -19,7 +19,7 @@
 
 <!-- NAVIGATION -->
 <nav class="navbar navbar-expand-lg nav-bg">
-  {% include 'nav_admin.html' %}
+  {% include 'nav_expert.html' %}
 </nav>
 
 <!-- INDEX PAGE -->
@@ -46,6 +46,13 @@
 </footer>
 
 <script src="{% static 'js/bootstrap.js' %}"></script>
-
+<script src="https://cdn.tiny.cloud/1/m6czoyzehkvpq30cyhrxu1q6w2p9g3g5v4w7iy3dwydvvrx1/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+      tinymce.init({
+        selector: 'textarea',
+        toolbar: 'bold italic',
+        menubar: false
+      });
+</script>
 </body>
 </html>

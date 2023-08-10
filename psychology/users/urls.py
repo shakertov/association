@@ -59,4 +59,18 @@ urlpatterns = [
 	path('just/',
 		lk_admin.just,
 		name='just12'),
+
+	# Личный кабинет эксперта
+	path('events/',
+		lk_expert.events,
+		name='events'),
+	path('events/add/',
+		lk_expert.event_add,
+		name='event_add'),
+	path('events/edit/<int:id>/',
+		lk_expert.event_edit,
+		name='event_edit'),
+	path('events/delete/<int:id>/',
+		lk_expert.event_delete,
+		name='event_delete')
 ]

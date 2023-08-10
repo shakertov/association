@@ -145,7 +145,7 @@ def login_view(request):
 		if request.user.is_admin:
 			return HttpResponseRedirect(reverse('users:list_representative'))
 		if request.user.is_expert:
-			return HttpResponseRedirect(reverse('users:list_representative'))
+			return HttpResponseRedirect(reverse('users:events'))
 	form = LoginForm(request.POST or None)
 	if request.method == 'POST':
 		if form.is_valid():
@@ -162,7 +162,7 @@ def login_view(request):
 				if user.is_admin:
 					return HttpResponseRedirect(reverse('users:list_representative'))
 				if user.is_expert:
-					return HttpResponseRedirect(reverse('users:list_representative'))
+					return HttpResponseRedirect(reverse('users:events'))
 				return HttpResponseRedirect(reverse('pages:index'))
 	data = {
 		'form': form,

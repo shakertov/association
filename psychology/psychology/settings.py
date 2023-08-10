@@ -20,6 +20,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'events.apps.EventsConfig',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'django.contrib.admin',

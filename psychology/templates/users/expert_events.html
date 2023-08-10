@@ -1,0 +1,36 @@
+{% extends 'lk_expert.html' %}
+
+{% block content %}
+<div class="container my-5">
+	<div class="card">
+		<div class="card-header">
+			{{ title }}
+		</div>
+		<div class="card-body">
+			<p>Чтобы добавить мероприятие, перейдите по ссылке: <a href="{% url 'users:event_add' %}">Добавить мероприятие</a></p>
+			<table class="table table-bordered table-hover table-stripped">
+				<thead>
+					<tr class="table-dark">
+						<td class="col-5">Название</td>
+						<td class="col-3">Город</td>
+						<td class="col-3">Дата проведения</td>
+						<td class="col-1"></td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for e in events %}
+					<tr>
+						<td>{{ e.title }}</td>
+						<td>{{ e.city.city }}</td>
+						<td>{{ e.datetime }}</td>
+						<td><a href="{% url 'users:event_edit' e.id %}" title="Редактировать мероприятие">Р</a> | <a href="{% url 'users:event_delete' e.id %}" title="Удалить мероприятие">У</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}

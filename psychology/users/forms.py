@@ -9,6 +9,9 @@ from users.models import (
 	Department,
 	Skill
 )
+from events.models import (
+	Event
+)
 
 User = get_user_model()
 
@@ -121,4 +124,14 @@ class LoginForm(YourOwnForm):
 			raise ValidationError(error_message)
 		return self.cleaned_data
 
-	
+
+class EventForm(YourOwnModelForm):
+	class Meta:
+		model = Event
+		fields = [
+			'title',
+			'description',
+			'city',
+			'address',
+			'datetime'
+		]

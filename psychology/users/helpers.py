@@ -17,7 +17,10 @@ ALLOWED_URL_FOR_ADMIN = [
 ]
 
 ALLOWED_URL_FOR_EXPERT = [
-	''
+	'events',
+	'event_add',
+	'event_edit',
+	'event_delete'
 ]
 
 

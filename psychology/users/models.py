@@ -127,6 +127,9 @@ class Department(models.Model):
 		help_text='Введите название города, в котором имеются Ваши представители',
 		max_length=100)
 
+	def __str__(self):
+		return self.city
+
 	class Meta:
 		ordering = ['city']
 
