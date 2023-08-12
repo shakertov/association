@@ -20,7 +20,8 @@ ALLOWED_URL_FOR_EXPERT = [
 	'events',
 	'event_add',
 	'event_edit',
-	'event_delete'
+	'event_delete',
+	'profile'
 ]
 
 

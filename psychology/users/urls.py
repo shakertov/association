@@ -4,7 +4,10 @@ from users.views import (
 	lk_admin,
 	lk_expert
 )
-
+from django.contrib.auth import views as a_views
+from users.forms import (
+	YourOwnChangePassForm
+)
 
 app_name = 'users'
 
@@ -72,5 +75,18 @@ urlpatterns = [
 		name='event_edit'),
 	path('events/delete/<int:id>/',
 		lk_expert.event_delete,
-		name='event_delete')
+		name='event_delete'),
+
+	path('profile/',
+		lk_expert.profile,
+		name='profile'),
+	path('expert_chg_pass/',
+		a_views.PasswordChangeView.as_view(
+			template_name='users/chg_pass_expert.html',
+			form_class=YourOwnChangePassForm,
+			success_url='done'),
+		name='expert_chg_pass'),
+	path('expert_chg_pass/done/',
+		lk_expert.success_chg_pass,
+		name='success_chg_pass')
 ]

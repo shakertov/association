@@ -11,7 +11,8 @@ from events.models import (
 
 # Загрузка форм
 from users.forms import (
-	EventForm
+	EventForm,
+	ProfileForm
 )
 
 # Загрузка хелпера
@@ -112,3 +113,38 @@ def event_delete(request, id):
 		messages.INFO,
 		'Мероприятие: ' + title + ' - удалено.')
 	return HttpResponseRedirect(reverse('users:events'))
+
+@login_required
+def profile(request):
+	response = lk_redirect(request)
+	if response is not None:
+		return response
+	user = request.user
+	extra_fields = user.fields
+	form = ProfileForm(request.POST or None,
+		files=request.FILES or None,
+		instance=extra_fields)
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			messages.add_message(
+				request,
+				messages.INFO,
+				'Профиль отредактирован')
+			return HttpResponseRedirect(reverse('users:profile'))
+	data = {
+		'form': form,
+		'title': 'Редактирование профиля',
+		'action': reverse('users:profile'),
+		'button': 'Внести изменения',
+		'files_form': True
+	}
+	return render(request, 'users/request_for_expert.html', data)
+
+@login_required
+def success_chg_pass(request):
+	messages.add_message(
+		request,
+		messages.INFO,
+		'Пароль успешно изменён!')
+	return HttpResponseRedirect(reverse('users:expert_chg_pass'))

@@ -1,13 +1,17 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import (
+	UserCreationForm,
+	AuthenticationForm,
+	PasswordChangeForm
+)
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from users.models import (
 	RequestUser,
 	Department,
-	Skill
+	Skill,
+	ExtraFieldsExpert
 )
 from events.models import (
 	Event
@@ -31,6 +35,13 @@ class YourOwnForm(forms.Form):
 
 
 class YourOwnRegForm(UserCreationForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		for visible in self.visible_fields():
+			visible.field.widget.attrs['class'] = 'form-control'
+
+
+class YourOwnChangePassForm(PasswordChangeForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		for visible in self.visible_fields():
@@ -96,6 +107,19 @@ class RegistrationForm(YourOwnRegForm):
 		'password2',
 		'phone',
 		'about']
+
+
+class ProfileForm(YourOwnModelForm):
+	class Meta:
+		model = ExtraFieldsExpert
+		fields = [
+			'last_name',
+			'first_name',
+			'middle_name',
+			'phone',
+			'about',
+			'avatar'
+		]
 
 
 class LoginForm(YourOwnForm):

@@ -6,7 +6,7 @@
 
 	<div class="card">
 		<div class="card-header">
-			{{ title }}
+			Смена пароля
 		</div>
 		<div class="card-body">
 			{% if form.errors %}
@@ -17,11 +17,7 @@
 			{% endfor %}
 
 			{% endif %}
-			<form novalidate
-			{% if files_form %}
-			enctype="multipart/form-data"
-			{% endif %}
-			action="{{ action }}" method="post">
+			<form novalidate method="post">
 				{% csrf_token %}
 				{% for field in form %}
 				<div class="row my-2 py-2 align-items-center border-bottom">
@@ -35,6 +31,7 @@
 							<div class="form-text text-danger">{{ error|escape }}</div>
 							{% endfor %}
 						{% endif %}
+						<p></p>
 						{% if field.help_text %}
 						<div class="form-text">{{ field.help_text }}</div>
 						{% endif %}
@@ -43,7 +40,7 @@
 				{% endfor %}
 				<div class="row my-2 py-2">
 					<div class="col text-center">
-						<button type="submit" class="btn btn-primary">{{ button }}</button>
+						<button type="submit" class="btn btn-primary">Сменить пароль</button>
 					</div>
 					
 				</div>

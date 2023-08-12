@@ -70,6 +70,11 @@ class ExtraFieldsExpert(models.Model):
 		verbose_name='Обо мне',
 		help_text='Расскажите о себе'
 	)
+	avatar = models.ImageField(
+		verbose_name='Фото профиля',
+		help_text='Загрузите Ваше фото, которое будет представлено посетителям',
+		blank=True,
+		upload_to='avatars')
 
 
 class RequestUser(models.Model):
