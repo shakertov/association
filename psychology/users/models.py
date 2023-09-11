@@ -70,6 +70,18 @@ class ExtraFieldsExpert(models.Model):
 		verbose_name='Обо мне',
 		help_text='Расскажите о себе'
 	)
+	skills = models.ManyToManyField(
+		'Skill',
+		through='Skillset',
+		verbose_name='Направления Вашей деятельности',
+		help_text='Укажите направления, в которых Вы компетентны'
+	)
+	city = models.ForeignKey(
+		'Department',
+		on_delete=models.DO_NOTHING,
+		verbose_name='Город',
+		help_text='Укажите город, в котором Вы проживаете'
+	)
 	avatar = models.ImageField(
 		verbose_name='Фото профиля',
 		help_text='Загрузите Ваше фото, которое будет представлено посетителям',
@@ -147,3 +159,14 @@ class Skill(models.Model):
 
 	class Meta:
 		ordering = ['skill']
+
+
+class Skillset(models.Model):
+	skill = models.ForeignKey(
+		Skill,
+		on_delete=models.CASCADE
+	)
+	field = models.ForeignKey(
+		ExtraFieldsExpert,
+		on_delete=models.CASCADE
+	)

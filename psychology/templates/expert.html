@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-2 border bg-white">
+	<div class="row">
+		<!-- COL N -->
+		<div class="col-4 p-5">
+			<img src="https://loremflickr.com/200/300" class="img-fluid mx-auto d-block" alt="...">
+		</div>
+		<div class="col-8 pr-3 pt-5 pb-3">
+			<h3>
+				{{ expert.fields.last_name }} {{ expert.fields.first_name }} {{ expert.fields.middle_name }}
+			</h3>
+			<p>
+				Город: Екатеринбург
+				<span class="text-decoration-underline">
+					{{ expert.field.city }}
+				</span>
+			</p>
+			<p>
+				Направления деятельности: хиромантия, астрология, нумерология, натальины карты
+			</p>
+			<hr>
+			{{ expert.fields.about|safe }}
+		</div>
+
+
+		<!-- <div class="col">
+
+			<div class="card mb-3" style="max-width: 100%;">
+				<div class="row g-0">
+					<div class="col-md-4 pl-2 pt-2">
+						<img src="https://loremflickr.com/200/300" class="img-fluid" alt="...">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">{{ expert.fields.last_name }} {{ expert.fields.first_name }} {{ expert.fields.middle_name }}</h5>
+							<p class="card-text">Специализация: хиромантия, астрология, нумерология</p>
+							<p class="card-text">{{ expert.fields.about|safe }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		COL N -->
+
+	</div>
+</div>
+<div class="container">
+	{% include 'paginator.html' %}
+</div>
+{% endblock %}

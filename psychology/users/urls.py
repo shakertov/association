@@ -6,7 +6,8 @@ from users.views import (
 )
 from django.contrib.auth import views as a_views
 from users.forms import (
-	YourOwnChangePassForm
+	YourOwnChangePassForm,
+	YourOwnResetPassForm
 )
 
 app_name = 'users'
@@ -28,6 +29,16 @@ urlpatterns = [
 	path('logout/',
 		views.logout_view,
 		name='logout'),
+	path('password_reset/',
+		a_views.PasswordResetView.as_view(
+			template_name='users/reset_password_form.html',
+			form_class=YourOwnResetPassForm,
+			success_url='done',
+			email_template_name='emails/password_reset_email.html'),
+		name='reset_pass'),
+	path('password_reset/done/',
+		views.reset_pass_done,
+		name='reset_pass_done'),
 
 	# Личный кабинет администратора
 	path('list_representative/',
@@ -88,5 +99,8 @@ urlpatterns = [
 		name='expert_chg_pass'),
 	path('expert_chg_pass/done/',
 		lk_expert.success_chg_pass,
-		name='success_chg_pass')
+		name='success_chg_pass'),
+
+	path('', views.experts, name='experts'),
+	path('id/<int:id>/', views.expert, name='expert')
 ]

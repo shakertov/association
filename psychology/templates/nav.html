@@ -10,10 +10,10 @@
           <a class="nav-link" href="{% url 'pages:index' %}">Ассоциация</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Сообщество экспертов</a>
+          <a class="nav-link" href="{% url 'users:experts' %}">Сообщество экспертов</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Мероприятия</a>
+          <a class="nav-link" href="{% url 'events:events' %}">Мероприятия</a>
         </li>
         {% if request.user.is_anonymous %}
         <li class="nav-item">

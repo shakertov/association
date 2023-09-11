@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'lk_expert.html' %}
 
 
 {% block content %}
@@ -17,7 +17,11 @@
 			{% endfor %}
 
 			{% endif %}
-			<form novalidate action="{{ action }}" method="post">
+			<form novalidate
+			{% if files_form %}
+			enctype="multipart/form-data"
+			{% endif %}
+			action="{{ action }}" method="post">
 				{% csrf_token %}
 				{% for field in form %}
 				<div class="row my-2 py-2 align-items-center border-bottom">
@@ -40,14 +44,38 @@
 				<div class="row my-2 py-2">
 					<div class="col text-center">
 						<button type="submit" class="btn btn-primary">{{ button }}</button>
-					</div>					
-				</div>
-				<div class="row my-2 py-2">
-					<div class="col text-center">
-						<a href="{% url 'users:reset_pass' %}">Забыли пароль?</a>
 					</div>
+					
 				</div>
 			</form>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-header">
+			Список Ваших специализаций
+		</div>
+		<div class="card-body">
+			<p>Управление Вашими навыками.</p>
+			<table class="table table-bordered table-hover table-stripped">
+				<thead>
+					<tr class="table-dark">
+						<td class="col-1">ID</td>
+						<td class="col-7">Навык</td>
+						<td class="col-4"></td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for s in skills %}
+					<tr>
+						<td>{{ s.id }}</td>
+						<td>{{ s.city }}</td>
+						<td><a href="{% url 'users:department_edit' s.id %}">Редактировать</a> | <a href="{% url 'users:department_delete' s.id %}">Удалить</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
 		</div>
 	</div>
 </div>

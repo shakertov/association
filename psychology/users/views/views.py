@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 import hashlib
+from django.core.paginator import Paginator
 
 # Загрузка моделей
 from users.models import (
@@ -89,8 +90,12 @@ def invite(request, id):
 
 
 def registration(request, link):
+	if not request.user.is_anonymous:
+		return HttpResponseRedirect(reverse('users:login'))
 	try:
 		link_for_reg = Invite.objects.get(link=link)
+		if link_for_reg.status:
+			return HttpResponseRedirect(reverse('users:login'))
 	except Invite.DoesNotExist:
 		return HttpResponseRedirect(reverse('users:login'))
 	user_request = link_for_reg.request
@@ -176,3 +181,39 @@ def login_view(request):
 def logout_view(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('users:login'))
+
+
+def reset_pass_done(request):
+	messages.add_message(
+		request,
+		messages.INFO,
+		'Проверьте почту для сброса пароля!')
+	return HttpResponseRedirect(reverse('users:reset_pass'))
+
+
+def experts(request):
+	experts = User.objects.filter(role='expert')
+	
+	per_page = 10
+	page_number = request.GET.get('page')
+
+	paginator = Paginator(experts, per_page)
+	page_obj = paginator.get_page(page_number)
+
+
+	data = {
+		'page_obj': page_obj
+	}
+	return render(request, 'experts.html', data)
+
+
+def expert(request, id):
+	try:
+		expert = User.objects.get(id=id)
+	except User.DoesNotExist:
+		return HttpResponse('404')
+
+	data = {
+		'expert': expert
+	}
+	return render(request, 'expert.html', data)

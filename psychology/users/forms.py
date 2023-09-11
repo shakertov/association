@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import (
 	UserCreationForm,
 	AuthenticationForm,
-	PasswordChangeForm
+	PasswordChangeForm,
+	PasswordResetForm
 )
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -42,6 +43,13 @@ class YourOwnRegForm(UserCreationForm):
 
 
 class YourOwnChangePassForm(PasswordChangeForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		for visible in self.visible_fields():
+			visible.field.widget.attrs['class'] = 'form-control'
+
+
+class YourOwnResetPassForm(PasswordResetForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		for visible in self.visible_fields():
@@ -118,6 +126,7 @@ class ProfileForm(YourOwnModelForm):
 			'middle_name',
 			'phone',
 			'about',
+			'city',
 			'avatar'
 		]
 
