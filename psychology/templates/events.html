@@ -2,47 +2,55 @@
 
 {% block content %}
 <div class="container my-5">
-
-	{% if page_obj %}
+	<div class="row">
+		{% if page_obj %}
 		{% for event in page_obj %}
-		<div class="col p-3 mb-3 bg-white border">
-		<h3>
-		{{ event.title }}
-		</h3>
-		<hr>
-		<p>
-		Дата проведения (МСК): 
-		<span class="text-decoration-underline">
-		{{ event.datetime }}
-		</span>
-		</p>
-		<p>
-		Город и адрес: 
-		<span class="text-decoration-underline">
-		{{ event.city }} - {{ event.address }}
-		</span>
-		</p>
-		<p>
-		Автор мероприятия: 
-		<span class="text-decoration-underline">
-		{{ event.expert.fields.first_name }} {{ event.expert.fields.middle_name }} 
-		</span>
-		-> 
-		<a href="{% url 'users:expert' event.expert.id %}">Перейти в профиль</a>
-		</p>
-		<hr>
-		<p>
-		{{ event.description|truncatechars_html:1000|safe }}
-		</p>
-		<p>
-			<a href="{% url 'events:event' event.id %}">Открыть полное описание мероприятия</a>
-		</p>
+		<div class="col-12 p-3 mb-3 bg-white border">
+			<h3>
+				{{ event.title }}
+			</h3>
+			<hr>
+			<p>
+				Дата проведения (МСК): 
+				<span class="text-decoration-underline">
+					{{ event.datetime }}
+				</span>
+			</p>
+			<p>
+				Город и адрес: 
+				<span class="text-decoration-underline">
+					{{ event.city }} - {{ event.address }}
+				</span>
+			</p>
+			<p>
+				Автор мероприятия: 
+				<span class="text-decoration-underline">
+					{{ event.expert.fields.first_name }} {{ event.expert.fields.middle_name }} 
+				</span>
+				-> 
+				<a href="{% url 'users:expert' event.expert.id %}">Перейти в профиль</a>
+			</p>
+			<hr>
+			<p>
+				{{ event.description|truncatechars_html:1000|safe }}
+			</p>
+			<p>
+				<a href="{% url 'events:event' event.id %}">Открыть полное описание мероприятия</a>
+			</p>
 		</div>
 		{% endfor %}
-	{% endif %}
-	<div class="col">
-	{% include 'paginator.html' %}
+		<div class="row">
+			<div class="col">
+				{% include 'paginator.html' %}
+			</div>
+		</div>
+		{% else %}
+		<div class="row">
+			<div class="col p-3 mb-3 bg-white border">
+				<h3>Мероприятий в данный момент не проводится!</h3>
+			</div>
+		</div>
+		{% endif %}
 	</div>
-
 </div>
 {% endblock %}

@@ -148,8 +148,3 @@ def success_chg_pass(request):
 		messages.INFO,
 		'Пароль успешно изменён!')
 	return HttpResponseRedirect(reverse('users:expert_chg_pass'))
-
-
-@login_required
-def skills(request):
-	pass

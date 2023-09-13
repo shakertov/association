@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
 <div class="container mt-5 mb-2">
-	<div class="row row-cols-2">
 		{% if page_obj %}
+		<div class="row row-cols-2">
 		{% for expert in page_obj %}
 		<!-- COL N -->
 		<div class="col">
@@ -11,14 +12,32 @@
 			<div class="card mb-3" style="max-width: 540px;">
 				<div class="row g-0">
 					<div class="col-md-4 p-2">
-						<img src="https://loremflickr.com/200/300" class="img-fluid" alt="...">
+						{% if expert.fields.avatar %}
+						{% thumbnail expert.fields.avatar "200x300" crop="center" as im %}
+						<img src="{{ im.url }}" class="img-fluid" width="{{ im.width }}" height="{{ im.height }}">
+						{% endthumbnail %}
+						{% else %}
+						<img src="https://dummyimage.com/200x300/e3e0e3/636363.jpg&text=НЕТ ФОТО" class="img-fluid" alt="...">
+						{% endif %}						
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
 							<h5 class="card-title">{{ expert.fields.last_name }} {{ expert.fields.first_name }} {{ expert.fields.middle_name }}</h5>
 							<hr>
 							<p class="card-text">Город: {{ expert.fields.city }}</p>
-							<p class="card-text">Специализация: хиромантия, астрология, нумерология</p>
+							<p class="card-text">Специализация: 
+							{% if expert.fields.skills.all %}
+							{% for skill in expert.fields.skills.all %}
+							{{ skill }}
+								{% if forloop.last %}
+								
+								{% else %}
+								-
+								{% endif %}
+							{% endfor %}
+							{% else %}
+							Не указано экспертом
+							{% endif %}</p>
 							<hr>
 							<p class="card-text">{{ expert.fields.about|striptags|truncatechars:150 }}</p>
 							<p class="card-text"><a href="{% url 'users:expert' expert.id %}">Посмотреть профиль</a></p>
@@ -30,9 +49,14 @@
 		</div>
 		<!-- COL N -->
 		{% endfor %}
+		</div>
+		{% else %}
+		<div class="row">
+			<div class="col p-3 mb-3 bg-white border">
+				<h3>Экспертов пока не зарегистрировано на портале!</h3>
+			</div>
+		</div>
 		{% endif %}
-
-	</div>
 </div>
 <div class="container">
 	{% include 'paginator.html' %}

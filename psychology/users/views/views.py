@@ -73,12 +73,12 @@ def invite(request, id):
 		link=hash_link
 	)
 
-	site = 'http://127.0.0.1:8000/users/reg/'
+	site = 'http://aexpertov.ru/users/reg/'
 	send_mail(
 		'[aaxpert] Приглашение на регистрацию',
-		'Ваш HASH для вступления: ' + site + hash_link,
-		'from@mailer.com',
-		['to@mailer.com'],
+		'Ваша ссылка для регистрации: ' + site + hash_link,
+		'admin@aexpertov.ru',
+		[obj.email],
 		fail_silently=False
 	)
 	messages.add_message(
@@ -189,6 +189,14 @@ def reset_pass_done(request):
 		messages.INFO,
 		'Проверьте почту для сброса пароля!')
 	return HttpResponseRedirect(reverse('users:reset_pass'))
+
+
+def pass_confirm_done(request, uidb64):
+	messages.add_message(
+		request,
+		messages.INFO,
+		'Пароль успешно установлен!')
+	return HttpResponseRedirect(reverse('users:login'))
 
 
 def experts(request):

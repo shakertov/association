@@ -7,7 +7,8 @@ from users.views import (
 from django.contrib.auth import views as a_views
 from users.forms import (
 	YourOwnChangePassForm,
-	YourOwnResetPassForm
+	YourOwnResetPassForm,
+	YourOwnSetPassForm
 )
 
 app_name = 'users'
@@ -39,6 +40,15 @@ urlpatterns = [
 	path('password_reset/done/',
 		views.reset_pass_done,
 		name='reset_pass_done'),
+	path('reset/<uidb64>/<token>/',
+		a_views.PasswordResetConfirmView.as_view(
+			template_name='users/reset_password_form.html',
+			form_class=YourOwnSetPassForm,
+			success_url='done/'),
+		name='password_reset_confirm'),
+	path('reset/<uidb64>/set-password/done/',
+		views.pass_confirm_done,
+		name='confirm_pass_done'),
 
 	# Личный кабинет администратора
 	path('list_representative/',

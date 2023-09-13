@@ -74,7 +74,7 @@ class ExtraFieldsExpert(models.Model):
 		'Skill',
 		through='Skillset',
 		verbose_name='Направления Вашей деятельности',
-		help_text='Укажите направления, в которых Вы компетентны'
+		help_text='Укажите направления, в которых Вы компетентны. Серым цветом выделены уже принадлежащие Вам компетенции.'
 	)
 	city = models.ForeignKey(
 		'Department',
@@ -156,6 +156,9 @@ class Skill(models.Model):
 		verbose_name='Область специализации',
 		help_text='Введите название специализации',
 		max_length=100)
+
+	def __str__(self):
+		return self.skill
 
 	class Meta:
 		ordering = ['skill']

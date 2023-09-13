@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
 <div class="container mt-5 mb-2 border bg-white">
 	<div class="row">
 		<!-- COL N -->
 		<div class="col-4 p-5">
-			<img src="https://loremflickr.com/200/300" class="img-fluid mx-auto d-block" alt="...">
+			{% if expert.fields.avatar %}
+				{% thumbnail expert.fields.avatar "200x300" crop="center" as im %}
+				<img src="{{ im.url }}" class="img-fluid" width="{{ im.width }}" height="{{ im.height }}">
+				{% endthumbnail %}
+				{% else %}
+				<img src="https://dummyimage.com/200x300/e3e0e3/636363.jpg&text=НЕТ ФОТО" class="img-fluid" alt="...">
+				{% endif %}
 		</div>
 		<div class="col-8 pr-3 pt-5 pb-3">
 			<h3>
@@ -18,7 +25,19 @@
 				</span>
 			</p>
 			<p>
-				Направления деятельности: хиромантия, астрология, нумерология, натальины карты
+				Направления деятельности:
+				{% if expert.fields.skills.all %}
+					{% for skill in expert.fields.skills.all %}
+						{{ skill }}
+						{% if forloop.last %}
+
+						{% else %}
+						-
+						{% endif %}
+					{% endfor %}
+				{% else %}
+				Не указано экспертом
+				{% endif %}
 			</p>
 			<hr>
 			{{ expert.fields.about|safe }}

@@ -21,7 +21,8 @@ ALLOWED_URL_FOR_EXPERT = [
 	'event_add',
 	'event_edit',
 	'event_delete',
-	'profile'
+	'profile',
+	'skillset'
 ]
 
 
