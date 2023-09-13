@@ -17,6 +17,8 @@
 ![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-3.png)
 Личный кабинет администратора
 ![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-4.png)
+Личный кабинет эксперта - редактирование профиля
+![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-5.png)
 
 ### ER диаграмма
 ![ERD](https://github.com/shakertov/association/blob/main/images/git-1.png)
