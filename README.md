@@ -3,6 +3,16 @@
 
 Регистрация экспертов происходит по приглашению после формирования заявки на вступление в ассоциацию.
 
+После регистрации эксперт может:
+- редактировать свой профиль, добавлять фото к анкете
+- управлять своими мероприятими (добавлять новые, редактировать и удалять)
+- изменять пароль
+
+Администратор может:
+- отправлять приглашения пользователям, подавшим заявку на вступление в ассоциацию
+- управлять списком городов, доступных экспертам
+- управлять списком компетенций, доступных экспертам
+
 ## Технологии
 Django, Sorl-thumbnail, Pillow, Python3, Sqlite, PosgresSQL, Bootstrap, HTML, CSS.
 
@@ -22,6 +32,8 @@ Django, Sorl-thumbnail, Pillow, Python3, Sqlite, PosgresSQL, Bootstrap, HTML, CS
 ![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-4.png)
 Личный кабинет эксперта - редактирование профиля
 ![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-5.png)
+Личный кабинет эксперта - управление мероприятиями
+![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-6.png)
 
 ### ER диаграмма
 ![ERD](https://github.com/shakertov/association/blob/main/images/git-1.png)
