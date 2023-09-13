@@ -9,4 +9,4 @@
 5. Регистрация хостинга, домена, пуш приложения на хостинг, настройка раздачи статики и файлов.
 
 ### ER диаграмма
-![ERD](http://github.com/shakertov/association/images/git-1.png)
+![ERD](https://github.com/shakertov/association/blob/main/images/git-1.png)
