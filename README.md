@@ -11,7 +11,10 @@
 5. Регистрация хостинга, домена, пуш приложения на хостинг, настройка раздачи статики и файлов.
 
 ### Внешний вид сайта
+Раздел мероприятий
 ![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-2.png)
+Раздел экспертов
+![Внешний вид](https://github.com/shakertov/association/blob/main/images/git-3.png)
 
 ### ER диаграмма
 ![ERD](https://github.com/shakertov/association/blob/main/images/git-1.png)
